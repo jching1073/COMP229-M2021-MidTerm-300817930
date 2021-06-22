@@ -60,17 +60,46 @@ router.post('/add', (req, res, next) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+    let id = req.params.id; //Get id
+    console.log(id);
+
+    book.findById(id, {}, {}, (err, editBook) =>
+    {
+      if(err)
+      {
+        console.error(err);
+        res.end(err);
+      }
+      res.render('books/details', {title: 'Edit', page: 'edit', books: editBook});
+    });
+
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+    let id = req.params.id;
+    console.log(id);
+
+    let editBook = new book 
+    ({
+      "_id": id,
+      "Title": req.body.title,
+      "Price": req.body.price,
+      "Author": req.body.author,
+      "Genre": req.body.genre
+    });
+
+    book.updateOne({_id: id}, editBook, {}, (err) => 
+    {
+      if(err)
+      {
+        console.error(err);
+        res.end(err);
+      }
+
+      res.redirect('/books');
+    });
 
 });
 
