@@ -81,7 +81,7 @@ router.post('/:id', (req, res, next) => {
     let id = req.params.id;
     console.log(id);
 
-    let editBook = new book 
+    let editBook = new book //make new book with same id (replace old one)
     ({
       "_id": id,
       "Title": req.body.title,
@@ -90,7 +90,7 @@ router.post('/:id', (req, res, next) => {
       "Genre": req.body.genre
     });
 
-    book.updateOne({_id: id}, editBook, {}, (err) => 
+    book.updateOne({_id: id}, editBook, {}, (err) => //Update Book then redirect
     {
       if(err)
       {
@@ -106,9 +106,19 @@ router.post('/:id', (req, res, next) => {
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+  console.log(id);
+
+  book.remove({_id: id}, (err) =>
+  {
+    if(err)
+    {
+      console.error(err);
+      res.end(err);
+    }
+    res.redirect('/books');
+  });
+    
 });
 
 
