@@ -1,3 +1,10 @@
+/*
+FileName - app.ts
+AuthorName - Jerome Ching
+StudentID - 300817930
+WebAppName - COMP229-M2021-Midterm-300817930
+*/
+
 // moddules for node and express
 import createError from 'http-errors';
 import express from 'express';
